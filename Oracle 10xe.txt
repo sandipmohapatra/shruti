@@ -1,0 +1,39 @@
+Database 
+-------------
+1)It is used to store data.It is stored in a tabular manner.(rows and columns)
+
+2)To  create tables
+create table studentshruti(rollno number,name varchar2(30),address varchar2(30));
+
+3)to insert data into the table
+insert into studentshruti values(103,'Madhu','Bangalore');
+
+4)to view the data
+select * from studentshruti;
+
+5)with condition
+select * from studentshruti where name='kiran'; 
+select * from studentshruti where rollno=101;
+
+6)to add column to the table
+alter table studentshruti add physics number;
+alter table studentshruti add biology number;
+alter table studentshruti add total number;
+alter table studentshruti add average number;
+
+
+7)to insert the data into the added column
+update studentshruti set physics=78 where name='kiran';
+update studentshruti set physics=88 where name='shruti';
+update studentshruti set physics=78 where name='Madhu';
+update studentshruti set chemistry=89 where name in('shruti','kiran','Madhu');
+update studentshruti set biology=79 where name in('shruti','kiran','Madhu');
+update studentshruti set total=physics+chemistry+biology;
+update studentshruti set average=round(total/3,2);
+-------------------------------------------------------------
+
+8)to update the data
+update studentshruti set address='hydrabad' where name='kiran';
+
+9)to delete the data
+delete studentshruti where name='kiran';
