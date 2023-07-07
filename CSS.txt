@@ -13,3 +13,6 @@ we have 3 types of CSS.
 <body></body>
 </html>
 -------------------------------------------------------------------------
+id :- for same element if you want to different effect we use id.
+
+class:- for different elements if we want to give same effect we use class.
