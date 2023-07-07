@@ -1,0 +1,15 @@
+CSS:-
+cascading style sheet
+-----------------------------------
+It is used to style design the html page
+we have 3 types of CSS.
+1)internal css
+2)external css
+3)inline css.
+--------------------------
+<html>
+<head></head>
+<style><style>
+<body></body>
+</html>
+-------------------------------------------------------------------------
