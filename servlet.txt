@@ -71,3 +71,103 @@ public class Second extends GenericServlet
 }
 
 ----------------------------------------------------------------------------------------------------------
+example-2
+---------------------
+<html>
+    <body background="college.webp">
+        <h1><center>Student Registration Page</center></h1><hr color="red">
+        <form action="Second">
+        <table border="1">
+    <tr><td>Enter your name <td><input type=text name=t1 size=20 ></tr>
+    <tr><td>Enter your Address <td><input type=text name=t2 size=20 ></tr>
+    <tr><td>Enter your DOB <td><input type=date name=t3 size=20></tr>
+    <tr><td>Enter your Phoneno<td><input type=number name=t4 size=20></tr>
+    <tr><td>Enter your Email<td><input type=email name=t5 size=20></tr>
+    <tr><td><td>
+    <input type=submit value="Insert" name=b1>
+    <input type=submit value="Update" name="b1">
+    <input type=submit value="Delete" name="b1">
+    <input type=submit value="Select" name="b1">
+        </tr>
+    </table>
+    </form>
+    </body>
+</html>
+------------------------------------------------------------
+import java.io.*;
+import java.sql.*;
+import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
+@WebServlet("/Second")
+public class Second extends GenericServlet 
+{
+	public void init()
+	{
+		System.out.println("one time execute");
+	}
+	@Override
+	public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+		PrintWriter pw=res.getWriter();
+		res.setContentType("text/html");		
+		String a=req.getParameter("t1");
+		String b=req.getParameter("t2");
+		String c=req.getParameter("t3");
+		String d=req.getParameter("t4");
+		String e=req.getParameter("t5");
+		String but=req.getParameter("b1");
+		try
+		{
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","1234");
+		if(but.equals("Insert"))
+		{
+		PreparedStatement ps=con.prepareStatement("insert into shruti values(?,?,?,?,?)");
+		ps.setString(1,a);
+		ps.setString(2,b);
+		ps.setString(3,c);
+		ps.setString(4,d);
+		ps.setString(5,e);
+		ps.execute();
+		pw.println("row inserted");
+		}
+		else if(but.equals("Update"))
+		{
+		PreparedStatement ps=con.prepareStatement("update shruti set address=?, DOB=? ,phoneno=?, email=? where name=?");
+		ps.setString(1,b);
+		ps.setString(2,c);
+		ps.setString(3,d);
+		ps.setString(4,e);
+		ps.setString(5,a);
+		ps.execute();
+		pw.println("row updated");
+		}
+		else if(but.equals("Delete"))
+		{
+		PreparedStatement ps=con.prepareStatement("delete shruti where name=?");
+		ps.setString(1,a);
+		ps.execute();
+		pw.println("row deleted");
+		}
+		else 
+		{
+		PreparedStatement ps=con.prepareStatement("select * from shruti");
+		ResultSet rs=ps.executeQuery();
+		pw.println("<table border=1>");
+		pw.println("<tr><th>Name <th> Address<th> DOB <th> Phone no <th>Email</tr>");
+		while(rs.next())
+		{
+			pw.println("<tr><td>"+rs.getString(1)+" <td> "+rs.getString(2)+"<td> "+rs.getString(3)+" <td> "+rs.getString(4)+" <td>"+rs.getString(5)+"</tr>");
+		}
+		pw.println("</table>");
+		}
+		}
+		catch(Exception ae)
+		{}
+			}
+	public void destroy()
+	{
+		System.out.println("to clear the memory");
+	}
+	
+}
+------------------------------------------------------------------------------------------
