@@ -1,0 +1,73 @@
+Servlet:- There are 2 types of sevlet
+1)generic servlet
+2)HTTP servlet
+Servlet is faster than JSP because JSP is converted to servlet.
+It is middle ware which accept request from the client page and process it and forward it to the backend.
+In generic servlet it can accept any type of protocals.
+In HTTP servlet it can accept only http protocals.Our internet works with http protocal.
+In http protocals we have session,cookies,sendRedirect.
+Difference between JSP and Servlet is In jsp the code is less.In JSP the code is converted to servlet.servlet is faster then JSP.
+Both accept request from the client page process it and forwards it to the backend.
+3)In servlet we don't have the main()
+we have the lifecycle method.
+1)init() :- it is used to assign the values.It will execute one time.
+2)service():- It will execute as many times you send request to the servlet.
+3)destroy():- It will execute one time.It is used to clear the memory that has been used to assign the cariables in the service().
+-------------------------------------------------------------------------------------------
+example-1
+-----------------------
+<html>
+    <body background="college.webp">
+        <h1><center>Student Registration Page</center></h1><hr color="red">
+        <form action="second">
+        <table border="1">
+    <tr><td>Enter your name <td><input type=text name=t1 size=20 ></tr>
+    <tr><td>Enter your Address <td><input type=text name=t2 size=20 ></tr>
+    <tr><td>Enter your DOB <td><input type=date name=t3 size=20></tr>
+    <tr><td>Enter your Phoneno<td><input type=number name=t4 size=20></tr>
+    <tr><td>Enter your Email<td><input type=email name=t5 size=20></tr>
+    <tr><td><td><input type=submit value="Insert" ></tr>
+    </table>
+    </form>
+    </body>
+</html>
+----------------------------------------------------------------------------------------------
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.annotation.WebServlet;
+@WebServlet("/Second")
+public class Second extends GenericServlet 
+{
+	public void init()
+	{
+		System.out.println("one time execute");
+	}
+	@Override
+	public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
+		PrintWriter pw=res.getWriter();
+		res.setContentType("text/html");		
+		String a=req.getParameter("t1");
+		String b=req.getParameter("t2");
+		String c=req.getParameter("t3");
+		String d=req.getParameter("t4");
+		String e=req.getParameter("t5");
+		pw.println("The name is "+a);
+		pw.println("<br>");
+		pw.println("The address is "+b);
+		pw.println("<br>");
+		pw.println("The DOB is "+c);
+		pw.println("<br>");
+		pw.println("The Phone no is "+d);
+		pw.println("<br>");
+		pw.println("The email is "+e);
+		
+		
+	}
+	public void destroy()
+	{
+		System.out.println("to clear the memory");
+	}
+	
+}
+
+----------------------------------------------------------------------------------------------------------
